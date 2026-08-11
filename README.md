@@ -18,8 +18,12 @@ GitHub
 Chaves primárias,estrangeiras, Relacionamentos, Normalização,JOINs, Views, Triggers e  Procedures
 
 👥 Equipe
-Nome 1 - Pedro Olimpio Arantes Freire Brandão
-Nome 2 - Gabriel de Oliveira de Assis
-Nome 3 - Eduardo Almeida Nome 4 -
+Nome 1 - Pedro Olimpio Arantes Freire Brandão 
+
+Nome 2 - Gabriel de Oliveira de Assis  
+
+Nome 3 - Eduardo Almeida   
+
+Nome 4 - Iann Ferreira 
 
 Status: 🚧 Em desenvolvimento
