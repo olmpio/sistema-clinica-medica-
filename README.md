@@ -24,6 +24,6 @@ Nome 2 - Gabriel de Oliveira de Assis
 
 Nome 3 - Eduardo Almeida   
 
-Nome 4 - Iann Ferreira 
+Nome 4 - 
 
 Status: 🚧 Em desenvolvimento
