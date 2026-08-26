@@ -123,4 +123,19 @@ Aqui estão os  principais atributos de cada entidade, que será implementado no
 - `status`
 
 
+## Relacionamentos
+
+Os principais relacionamentos previstos para o sistema são:
+
+* **Especialidade** `1 ─── N` **Médico**
+* **Paciente** `1 ─── N` **Consulta**
+* **Médico** `1 ─── N` **Consulta**
+* **Consulta** `N ─── N` **Exame**
+* **Consulta** `1 ─── 0..1` **Receita**
+* **Receita** `N ─── N` **Medicamento**
+* **Convênio** `1 ─── N` **Paciente**
+* **Consulta** `1 ─── 0..1` **Pagamento**
+
+> **Nota:** Nesta etapa, os relacionamentos são definidos apenas conceitualmente. As *Foreign Keys* (chaves estrangeiras) serão adicionadas posteriormente, conforme a evolução da modelagem lógica.
+
 
