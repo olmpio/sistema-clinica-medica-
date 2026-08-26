@@ -1,4 +1,4 @@
-CREATE TABLE Paciente (
+CREATE TABLE paciente (
     id INT,
     nome VARCHAR(100),
     cpf VARCHAR(14),
