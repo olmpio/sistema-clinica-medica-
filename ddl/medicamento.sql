@@ -1,6 +1,6 @@
 CREATE TABLE medicamento (
-    id INT,
-    nome VARCHAR(100),
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
     principio_ativo VARCHAR(100),
     fabricante VARCHAR(100)
 );
