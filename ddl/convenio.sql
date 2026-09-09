@@ -1,7 +1,7 @@
 CREATE TABLE convenio (
-    id INT,
-    nome VARCHAR(100),
-    numero_registro VARCHAR(50),
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    numero_registro VARCHAR(50) UNIQUE,
     telefone VARCHAR(20),
-    ativo BOOLEAN
+    ativo BOOLEAN NOT NULL DEFAULT TRUE
 );
