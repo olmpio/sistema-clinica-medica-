@@ -1,5 +1,5 @@
 CREATE TABLE especialidade (
-    id INT,
-    nome VARCHAR(100),
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL UNIQUE,
     descricao VARCHAR(255)
 );
