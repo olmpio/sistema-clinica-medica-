@@ -1,7 +1,6 @@
 🩺 Sistema de Gestão de Clínica Médica - MedData
 
-Status: 🚧 Em desenvolvimento
-
+Status: 🚀 Em Desenvolvimento (Etapa DDL & DML Concluída)
 
 ❇️ Projeto acadêmico de Banco de Dados SQL para gerenciamento de uma clínica médica.
 
@@ -9,46 +8,48 @@ Status: 🚧 Em desenvolvimento
 
 O sistema permite gerenciar pacientes, médicos, especialidades, consultas, exames, receitas, medicamentos e pagamentos.
 
-
 🛠️ Tecnologias 
 
-<br> PostgreSQL </br>
-<br> SQL </br>
-<br> DBeaver </br>
-<br>GitHub</br>
+- PostgreSQL
+- SQL
+- DBeaver
+- GitHub
 
 📚 Conceitos
 
+Chaves primárias (PK), Chaves estrangeiras (FK), Relacionamentos, Normalização, JOINs, Views, Triggers e Procedures.
 
-Chaves primárias,estrangeiras, Relacionamentos, Normalização,JOINs, Views, Triggers e  Procedures
+👥 Equipe
 
-
-<br>👥 Equipe</br>
-| Nome                                   |
+| Nome |
 |----------------------------------------|
-| 1-Pedro Olimpio Arantes Freire Brandão |
-| 2-Gabriel de Oliveira de Assis         |
-| 3-Eduardo Almeida                      |  
- 
-# Modelagem de Banco de Dados — MedSys
+| 1- Pedro Olímpio Arantes Freire Brandão |
+| 2- Gabriel de Oliveira de Assis |
+| 3- Eduardo Almeida |
+
+📂 Estrutura do Repositório
+
+- `/ddl`: Scripts de criação das tabelas e relacionamentos (`CREATE TABLE`).
+- `/dml`: Scripts de povoamento e carga de dados (`INSERT`).
+- `script_banco.sql`: Script unificado completo (`DROP` → `CREATE` → `INSERT`) para execução sequencial.
+
+---
+
+# Modelagem de Banco de Dados — MedData
 
 ## 1. Entidades
-
-Serão usadas essas entidades 
 
 1. **Paciente** — armazena os dados dos pacientes da clínica.
 2. **Médico** — armazena os dados dos médicos que trabalham na clínica.
 3. **Especialidade** — representa as especialidades médicas dos profissionais.
 4. **Consulta** — registra os atendimentos realizados ou agendados.
 5. **Exame** — armazena os tipos de exames disponíveis na clínica.
-6. **Consulta_Exame** — relaciona as consultas aos exames solicitados.
+6. **Consulta_Exame** — relaciona as consultas aos exames solicitados (associativa).
 7. **Receita** — registra as receitas emitidas pelos médicos.
 8. **Medicamento** — armazena os medicamentos que podem ser prescritos.
-9. **Receita_Medicamento** — relaciona as receitas aos medicamentos prescritos.
+9. **Receita_Medicamento** — relaciona as receitas aos medicamentos prescritos (associativa).
 10. **Convênio** — armazena os convênios aceitos pela clínica.
 11. **Pagamento** — registra os pagamentos relacionados às consultas.
-
-As entidades foram definidas de acordo com as principais atividades realizadas internamente em uma clínica médica.
 
 ---
 
@@ -64,110 +65,102 @@ A escolha desse domínio possibilita trabalhar diferentes tipos de relacionament
 
 ## 3. Atributos das Entidades
 
-Aqui estão os  principais atributos de cada entidade, que será implementado no SQL.
-
-( NÂO FOI ADICIONADO AINDA AS FK, como solicitado na atividade )
-
-### Paciente
-
-- `id`
+### Convênio
+- `id` (PK)
 - `nome`
-- `cpf`
-- `data_nascimento`
+- `numero_registro` (UNIQUE)
 - `telefone`
-- `email`
-- `endereco`
-- `ativo`
-
-### Médico
-
-- `id`
-- `nome`
-- `crm`
-- `telefone`
-- `email`
 - `ativo`
 
 ### Especialidade
-
-- `id`
-- `nome`
+- `id` (PK)
+- `nome` (UNIQUE)
 - `descricao`
 
-### Consulta
+### Exame
+- `id` (PK)
+- `nome` (UNIQUE)
+- `descricao`
+- `valor`
 
-- `id`
-- `data`
+### Medicamento
+- `id` (PK)
+- `nome`
+- `principio_ativo`
+- `fabricante`
+
+### Paciente
+- `id` (PK)
+- `nome`
+- `cpf` (UNIQUE)
+- `data_nascimento`
+- `telefone`
+- `email` (UNIQUE)
+- `endereco`
+- `ativo`
+- `id_convenio` (FK)
+
+### Médico
+- `id` (PK)
+- `nome`
+- `crm` (UNIQUE)
+- `telefone`
+- `email` (UNIQUE)
+- `ativo`
+- `id_especialidade` (FK)
+
+### Consulta
+- `id` (PK)
+- `data_consulta`
 - `horario`
 - `motivo`
 - `diagnostico`
 - `observacoes`
 - `status`
-
-### Exame
-
-- `id`
-- `nome`
-- `descricao`
-- `valor`
+- `id_paciente` (FK)
+- `id_medico` (FK)
 
 ### Consulta_Exame
-
-- `id`
+- `id` (PK)
+- `id_consulta` (FK)
+- `id_exame` (FK)
 - `data_exame`
 - `resultado`
 - `status`
 
 ### Receita
-
-- `id`
+- `id` (PK)
+- `id_consulta` (FK, UNIQUE)
 - `data_receita`
 - `instrucoes`
 
-### Medicamento
-
-- `id`
-- `nome`
-- `principio_ativo`
-- `fabricante`
-
 ### Receita_Medicamento
-
-- `id`
+- `id` (PK)
+- `id_receita` (FK)
+- `id_medicamento` (FK)
 - `dosagem`
 - `frequencia`
 - `duracao`
 
-### Convênio
-
-- `id`
-- `nome`
-- `numero_registro`
-- `telefone`
-- `ativo`
-
 ### Pagamento
-
-- `id`
+- `id` (PK)
+- `id_consulta` (FK, UNIQUE)
 - `valor`
 - `data_pagamento`
 - `forma_pagamento`
 - `status`
 
+---
 
 ## Relacionamentos
 
-Os principais relacionamentos previstos para o sistema são:
-
+* **Convênio** `1 ─── N` **Paciente**
 * **Especialidade** `1 ─── N` **Médico**
 * **Paciente** `1 ─── N` **Consulta**
 * **Médico** `1 ─── N` **Consulta**
-* **Consulta** `N ─── N` **Exame**
+* **Consulta** `N ─── N` **Exame** *(via Consulta_Exame)*
 * **Consulta** `1 ─── 0..1` **Receita**
-* **Receita** `N ─── N` **Medicamento**
-* **Convênio** `1 ─── N` **Paciente**
+* **Receita** `N ─── N` **Medicamento** *(via Receita_Medicamento)*
 * **Consulta** `1 ─── 0..1` **Pagamento**
 
-> **Nota:** Nesta etapa, os relacionamentos são definidos apenas conceitualmente. As *Foreign Keys* (chaves estrangeiras) serão adicionadas posteriormente, conforme a evolução da modelagem lógica.
-
-
+> **Nota:** Todos os relacionamentos e restrições de integridade referencial (*Foreign Keys*) foram devidamente implementados via DDL com tratamento de ações de deleção (`ON DELETE RESTRICT`, `ON DELETE CASCADE` e `ON DELETE SET NULL`).
